@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شهادة شكر وتقدير</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Reem+Kufi:wght@600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Cairo',sans-serif;background:linear-gradient(135deg,#ffe3f1,#e9ddff);min-height:100vh;padding:20px;text-align:center}
+h1{color:#a64d9a;margin:10px 0;font-size:24px}
+.box{max-width:420px;margin:15px auto;background:#fff;padding:18px;border-radius:20px;box-shadow:0 4px 15px rgba(166,77,154,.2)}
+input{width:100%;padding:12px;font-size:18px;border:2px solid #f3b6dd;border-radius:14px;text-align:center;font-family:'Cairo',sans-serif;outline:none}
+input:focus{border-color:#a64d9a}
+.btns{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+button{padding:11px 22px;font-size:16px;border:none;border-radius:25px;color:#fff;background:linear-gradient(135deg,#ff8fc7,#b388ff);cursor:pointer;font-family:'Cairo',sans-serif;font-weight:600}
+button:hover{opacity:.9}
+.wrap{overflow-x:auto;padding:10px 0}
+#cert{width:900px;height:640px;margin:0 auto;position:relative;background:#fffafd;border:14px solid #ff9ccf;border-radius:30px;padding:30px 50px;color:#6b3a6b;overflow:hidden;transform-origin:top center}
+#cert::before{content:'';position:absolute;inset:10px;border:3px dashed #c9a7ff;border-radius:20px;pointer-events:none}
+.deco{position:absolute;font-size:34px}
+.t1{top:22px;right:30px}.t2{top:22px;left:30px}.b1{bottom:20px;right:30px}.b2{bottom:20px;left:30px}
+.title{font-family:'Reem Kufi',sans-serif;font-size:50px;color:#d6409f;margin-top:18px}
+.sub{font-size:20px;color:#9b6bd1;margin-top:2px}
+.line{font-size:21px;margin-top:20px}
+.name{font-size:46px;font-weight:700;color:#a64d9a;margin:10px auto;border-bottom:3px dotted #ff9ccf;display:inline-block;min-width:360px;padding:0 20px;min-height:70px}
+.text{font-size:20px;line-height:1.9;margin:8px auto;max-width:700px}
+.parent{font-size:15px;color:#8a5a8a;margin-top:14px}
+.sign{display:flex;justify-content:space-around;margin-top:16px;font-size:17px}
+</style>
+</head>
+<body>
+<h1>🎀 شهادة شكر وتقدير 🎀</h1>
+<div class="box">
+<p style="margin-bottom:10px;color:#8a5a8a">اكتبي اسمك هنا وستظهر على الشهادة مباشرة</p>
+<input id="nameInput" type="text" placeholder="اسم الطالبة" oninput="document.getElementById('studentName').textContent=this.value||'اسم الطالبة'">
+<div class="btns">
+<button onclick="downloadImg()">📷 تحميل كصورة</button>
+<button onclick="downloadPdf()">📄 تحميل PDF</button>
+</div>
+</div>
+<div class="wrap">
+<div id="cert">
+<span class="deco t1">🌸</span><span class="deco t2">🌸</span>
+<span class="deco b1">🦋</span><span class="deco b2">🦋</span>
+<div class="title">شهادة شكر وتقدير</div>
+<div class="sub">⭐ ✨ ⭐</div>
+<div class="line">تتقدم المعلمة بجزيل الشكر والتقدير للطالبة المتميزة</div>
+<div class="name" id="studentName">اسم الطالبة</div>
+<div class="text">وذلك على حضورها الجميل للمنصة، ومواظبتها والتزامها، ومشاركتها الفعّالة أثناء الحصص، فكانت مثالاً للاجتهاد والأدب. نسأل الله لها دوام التوفيق والنجاح 💖</div>
+<div class="parent">🌷 كما نتقدم بالشكر الجزيل لولي الأمر الكريم على متابعته الدائمة وحرصه على ابنته 🌷</div>
+<div class="sign"><div>المعلمة: منال مباركي</div><div>التاريخ: ____ / ____ / ____</div></div>
+</div>
+</div>
+<script>
+function fit(){var c=document.getElementById('cert');var s=Math.min(1,(window.innerWidth-30)/900);c.style.transform='scale('+s+')';c.parentElement.style.height=(640*s+20)+'px'}
+window.addEventListener('resize',fit);fit();
+function cap(){var c=document.getElementById('cert');var old=c.style.transform;c.style.transform='none';return html2canvas(c,{scale:2,backgroundColor:null}).then(function(cv){c.style.transform=old;return cv})}
+function nm(){return document.getElementById('nameInput').value||'شهادة'}
+function downloadImg(){cap().then(function(cv){var a=document.createElement('a');a.download='شهادة-'+nm()+'.png';a.href=cv.toDataURL('image/png');a.click()})}
+function downloadPdf(){cap().then(function(cv){var p=new window.jspdf.jsPDF({orientation:'landscape',unit:'px',format:[900,640]});p.addImage(cv.toDataURL('image/png'),'PNG',0,0,900,640);p.save('شهادة-'+nm()+'.pdf')})}
+</script>
+</body>
+</html>
